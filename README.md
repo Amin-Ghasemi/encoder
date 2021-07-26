@@ -1,2 +1,2 @@
 # Compyler
-Compiler and encode python files
+Compiler and encoder python files
