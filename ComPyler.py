@@ -1,18 +1,16 @@
+import platform
 import marshal, base64
 from os import system, getcwd
 from colorama import Fore, Style
-import platform
 
-def Clear():
-    osName = platform.system()
-    if osName == "Windows":
+def clear():
+    os_name = platform.system()
+    if os_name == "Windows":
         system("cls")
-    elif osName == "Linux":
+    elif os_name == "Linux":
         system("clear")
     else:
         pass
-
-Clear()
 
 def menu():
     print(f"""{Fore.LIGHTBLUE_EX}
@@ -31,25 +29,17 @@ def menu():
     while True:
         command = input(f"   {Fore.LIGHTGREEN_EX}*{Style.RESET_ALL} Select a Option  {Fore.GREEN}➜{Style.RESET_ALL}  ")
         if command == "1":
-            Compiler()
+            compiler()
         elif command.lower() == "e" or command.lower() == "exit":
             exit()
         else:
-            Clear()
+            clear()
             menu()
 
-global file_name
-def Compiler():
+def compiler():
     print(f"\n        ^ location {Fore.GREEN}➜ {Fore.LIGHTRED_EX} {getcwd()}{Style.RESET_ALL}\n")
+
     file_name = input(f"             {Fore.LIGHTGREEN_EX}*{Style.RESET_ALL} Enter file Name {Fore.GREEN}➜ {Style.RESET_ALL} ")
-    while len(file_name) == 0:
-        Clear()
-        menu()
-    if file_name.lower() == "b":
-        Clear()
-        menu()
-    elif file_name.lower() == "e" or file_name.lower() == "exit":
-        exit()
     darsad = 1
     file_name_replace =file_name.replace(".py", "")
     compiled_file_name = f"{file_name_replace}"
@@ -59,9 +49,9 @@ def Compiler():
             file_py = open(f"{file_name}", 'r', encoding="utf8")
             file_py_read = file_py.read().encode('UTF-8')
             encoded = base64.b85encode(file_py_read)
-            code = f"""global x\nx = compile(base64.b85decode({encoded}), "Dr_Venom", "exec")"""
+            code = f"""global codes\ncodes = compile(base64.b85decode({encoded}), "Dr_Venom", "exec")"""
             exec(code)
-            z = base64.b85encode(marshal.dumps(x))
+            z = base64.b85encode(marshal.dumps(codes))
             file_name = file_name.replace(".py", "")
             compiled = open(f"{compiled_file_name}_compiled.py", "w")
 
@@ -72,15 +62,15 @@ def Compiler():
 
             file_name = f"{compiled_file_name}_compiled.py"
 
-            Clear()
+            clear()
             darsad = round(darsad, 1)
             print(f"\n\t{darsad}%")
             darsad += 4.1
             status = True
-
         except:
             status = False
-    Clear()
+    clear()
+
     if status:
         darsad = 100
         print(f"\n\t{Fore.LIGHTGREEN_EX}{darsad}% Compeleted {compiled_file_name}_compiled.py{Style.RESET_ALL}")
@@ -88,6 +78,11 @@ def Compiler():
         print(f"\n\t{Fore.LIGHTRED_EX}Error in Compeleted.{Style.RESET_ALL}")
         
     input("\n\n\tEnter To continue...")
-    Clear()
+
+    clear()
     menu()
+
+global file_name
+
+clear()
 menu()
