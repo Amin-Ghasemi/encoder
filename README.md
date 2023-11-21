@@ -10,7 +10,7 @@ pip install colorama
 
 ### Then run this: 
 ```bash
-python ComPyler.py
+python encoder.py
 ```
 
 Note: Use `pip3 / python3` if you are on Linux or Mac.
